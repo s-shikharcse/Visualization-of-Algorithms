@@ -1,5 +1,5 @@
 
-# VISUALIZATION OF PRIORITY BASED SCHEDULING ALGORITHM 
+# Visualization of Priority Based Scheduling Algorithm 
  
  
  Screen shot : https://postimg.org/image/gr3vwylc5/
