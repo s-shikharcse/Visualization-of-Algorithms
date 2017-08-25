@@ -1,6 +1,6 @@
 <b/> 
 VISUALIZATION OF PRIORITY BASED SCHEDULING ALGORITHM 
-
+ Screen shot : https://postimg.org/image/fnjrl00p1/
 
 * Priority scheduling is a non-preemptive algorithm and one of the most common scheduling algorithms in batch systems.
 
