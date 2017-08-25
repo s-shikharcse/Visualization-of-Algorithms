@@ -1,6 +1,6 @@
 # Visualization-of-Algorithms
 
-Some of the CPU scheduling algorithms visualization using Graphics.h library of C programming language. 
+Implementation of some of the CPU scheduling algorithms visualization using Graphics.h library of C programming language. 
 
 # Insructions for Linux User
 
