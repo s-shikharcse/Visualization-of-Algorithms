@@ -1,5 +1,5 @@
 
-# VISUALIZATION OF FIRST COME FIRST SERVE SCHEDULING ALGORITHM
+# Visualization of First Come First Serve Scheduling Algorithm
 
 Screen shot: https://postimg.org/image/fnjrl00p1/ 
 * Jobs are executed on first come, first serve basis.
