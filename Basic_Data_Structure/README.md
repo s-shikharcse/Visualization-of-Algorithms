@@ -1,4 +1,4 @@
-# Basic Data Structure Operation Visualization
+# Basic Data Structure Operations Visualization
  
  ## a) Stack: 
  In this I have implemented basic primitive operations of stack such as PUSH(), POP(), isEmpty(), isFull(), etc. 
