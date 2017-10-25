@@ -1,3 +1,5 @@
+//author @Shikhar Sharma NITH
+
 #include<stdio.h>
 #include<conio.h>
 #include<graphics.h>
