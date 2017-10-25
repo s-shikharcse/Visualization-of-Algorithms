@@ -14,9 +14,9 @@ used C/C++ graphics library and Object Oriented Programming concepts.
 
 - Linux users need to install some packages and library to compile graphics.h while windows user can use TURBO C for executing graphics program.
 
-    1- sudo apt-get install build-essential
+      1- sudo apt-get install build-essential
 
-    2- sudo apt-get install libsdl-image1.2 libsdl-image1.2-dev guile-1.8 guile-1.8-dev libsdl1.2debian:i386 libsdl1.2debian libart-2.0-dev libaudiofile-dev libesd0-dev libdirectfb-dev libdirectfb-extra libfreetype6-dev libxext-dev x11proto-xext-dev libfreetype6 libaa1 libaa1-dev libslang2-dev libasound2 libasound2-dev
+      2- sudo apt-get install libsdl-image1.2 libsdl-image1.2-dev guile-1.8 guile-1.8-dev libsdl1.2debian:i386 libsdl1.2debian libart-2.0-dev libaudiofile-dev libesd0-dev libdirectfb-dev libdirectfb-extra libfreetype6-dev libxext-dev x11proto-xext-dev libfreetype6 libaa1 libaa1-dev libslang2-dev libasound2 libasound2-dev
 
 - Download libgraph
 
