@@ -37,4 +37,8 @@ used C/C++ graphics library and Object Oriented Programming concepts.
       gcc generatepid.c struct.h graphics.c main.c -lgraph
 
       ./a.out
+      
+ # Basic Data Structure Operation Visualization
+ 
+ **Stack
 
