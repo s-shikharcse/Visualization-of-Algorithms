@@ -1,6 +1,14 @@
-# Visualization-of-Algorithms-and-Data-Strucutre 
+# Visualization-of-basic-Data-Strucutre-and-Algorithms
 
-Implementation of some of the CPU scheduling algorithms visualization using Graphics.h library of C programming language. 
+Graphic simulation for:
+- CPU scheduling algorithms such as FCFS, SJF and Priority scheduling.
+- Shortest & 2nd shortest path in a weighted graph using Dijkstra's Algorithm.
+- Basic data structures such as Stack, Queue & Linked list and their basic operations.
+- AVL Tree operations (Insert, Delete, Inorder, Postorder, etc).
+- N Queen problem using backtracking.
+used C/C++ graphics library and Object Oriented Programming concepts.
+ 
+
 
 # Insructions for Linux User
 
