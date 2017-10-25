@@ -12,7 +12,7 @@ used C/C++ graphics library and Object Oriented Programming concepts.
 
 # Insructions for Linux User
 
-Linux users need to install some packages and library to compile graphics.h while windows user can use TURBO C for executing graphics program.
+- Linux users need to install some packages and library to compile graphics.h while windows user can use TURBO C for executing graphics program.
 
     1- sudo apt-get install build-essential
 
@@ -20,21 +20,21 @@ Linux users need to install some packages and library to compile graphics.h whil
 
 - Download libgraph
 
-    tar -xvzf libgraph-1.0.2
+      tar -xvzf libgraph-1.0.2
 
-    cd libgraph-1.0.2
+      cd libgraph-1.0.2
 
-    ./configure
+      ./configure
 
-     sudo make
+      sudo make
 
-     sudo make install
+      sudo make install
 
-    sudo cp /usr/local/lib/libgraph.* /usr/lib
+      sudo cp /usr/local/lib/libgraph.* /usr/lib
  
 - Compile and Run
 
-    gcc generatepid.c struct.h graphics.c main.c -lgraph
+      gcc generatepid.c struct.h graphics.c main.c -lgraph
 
-    ./a.out
+      ./a.out
 
