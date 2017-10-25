@@ -1,4 +1,4 @@
-# Visualization-of-Algorithms
+# Visualization-of-Algorithms-and-Data-Strucutre 
 
 Implementation of some of the CPU scheduling algorithms visualization using Graphics.h library of C programming language. 
 
