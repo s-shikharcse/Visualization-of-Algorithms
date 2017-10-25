@@ -10,7 +10,7 @@ used C/C++ graphics library and Object Oriented Programming concepts.
  
 
 
-# Insructions for Linux User
+## Insructions for Linux User
 
 - Linux users need to install some packages and library to compile graphics.h while windows user can use TURBO C for executing graphics program.
 
@@ -38,7 +38,7 @@ used C/C++ graphics library and Object Oriented Programming concepts.
 
       ./a.out
       
- # Basic Data Structure Operation Visualization
+ ## Basic Data Structure Operation Visualization
  
- **Stack
+ ### Stack: 
 
