@@ -82,14 +82,10 @@ for(i=0;i<n;i++)
 }}
 for(int j=0;j<n;j++)
 diag45[j]=sol[j]=32767;
-//sol[1]=1;
-//int c1=0;
-//while(c1!=7)
-//{
+
 num1=x1;
 queens(0,c1);
-//c1++;
-//}
+
 setcolor(WHITE);
 outtextxy(x3,y1,"All solutions are over ");
 printf("Total number of solutions is %d ",num);
@@ -112,12 +108,7 @@ setcolor(WHITE);
 setfillstyle(1,WHITE);
 fillellipse(x1+((c)*x2),y1+(r*y2),6,6);
 delay(350);
-//printf("r is %d ; c is %d
-// ",r,c);
-//getch();
-/*delay(100);
-printf("r is %d ; c is %d
- ",r,c);*/
+
 d45=r-c;
 for(i=0;i<r;i++)
 {
@@ -133,17 +124,12 @@ break;
 //If the queen is safe :-
 if(atck!=1)
 {
-//setcolor(WHITE);
-//pieslice(x1+(c*num2*2),y1+(r*num1*2),0,360,4);
 sol[r]=c;
 diag45[r]=r-c;
 if(r==(n-1))
 {
 printf("A possible solution is : ");
-//for(i=0;i<n;i++)
-//printf("%d ",sol[i]);
-//printf("
-//)
+
 num++;
 getch();
 if(c==(n-1))
@@ -160,11 +146,8 @@ else
 m=1;
 queens(r,c+1);
 }}
-//*********//
 else
 {
-/*for(i=0;i<r;i++)
-printf("%d ",sol[i]);*/
 sol[r+1]=0;
 queens(r+1,0);
 if(c!=(n-1))
@@ -199,8 +182,7 @@ fillellipse(x1+(c*x2),y1+(r*y2),6,6);
      {
      if(c!=(n-1))
      printf("");
-//          else
-//          printf("All solutions are over ! ");
      }
 getch();
-}}
+}
+}
