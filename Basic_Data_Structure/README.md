@@ -1,4 +1,5 @@
 # Basic Data Structure Operations Visualization
+Used C graphics library and C++ object oriented cocepts.
  
  ## a) Stack: 
  In this I have implemented basic primitive operations of stack such as PUSH(), POP(), isEmpty(), isFull(), etc. 
