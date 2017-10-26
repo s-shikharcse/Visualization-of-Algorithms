@@ -1,13 +1,18 @@
 // author@ Shikhar Sharma NIT Hamirpur, H.P, INDIA. 
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
 #include <dos.h>
 #include <string.h>
 #include <graphics.h>
 #include <conio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 
-struct node
+int gdriver=DETECT,gmode=0,errorcode;
+char element[3];
+int x=1,maxx,midx,xcoord,ycoord,level=320,prevlevel;
+
+//struct variable to store the tree node info
+struct node 
 {
    int element;
    node *left;
@@ -15,39 +20,37 @@ struct node
    int height;
 };
 
-	typedef struct node *nodeptr;
 
-	void insert(int,nodeptr &);
-	void del(int, nodeptr &);
-	int deletemin(nodeptr &);
-	void find(int,nodeptr &);
+	typedef struct node *nodeptr;
+	void insert(int,nodeptr &); // to insert a node in the tree
+	void del(int, nodeptr &);  // to delete a node from the tree
+	int deletemin(nodeptr &); // delete the leaf node of the left subtree
+	void find(int,nodeptr &); // check the presence of an element in O(logn) time
 	nodeptr findmin(nodeptr);
 	nodeptr findmax(nodeptr);
 	void makeempty(nodeptr &);
 	nodeptr nodecopy(nodeptr &);
-	void preorder(nodeptr);
+	void preorder(nodeptr); //tree traversal in preorder way
 	void inorder(nodeptr);
 	void postorder(nodeptr);
-	int bsheight(nodeptr);
-	nodeptr singlerotateleft(nodeptr &);
+	int bsheight(nodeptr); // gives the height of node of the tree
+	nodeptr singlerotateleft(nodeptr &); // to make a balanced AVL tree if its unbalanced
 	nodeptr doublerotateleft(nodeptr &);
 	nodeptr singlerotateright(nodeptr &);
 	nodeptr doublerotateright(nodeptr &);
 	int max(int,int);
 	int nonodes(nodeptr);
 
-
-int gdriver=DETECT,gmode=0,errorcode;
-char element[3];
-int x=1,maxx,midx,xcoord,ycoord,level=320,prevlevel;
-
+/*This function displays the AVL Tree forms in terms of node interconnections
+  Nodes are shown as filled ellipses and they are connected via a straight line */
 void GDisplay(nodeptr p,int xcoord,int ycoord)
 {
+	// p contains the root node
   if (p!=NULL)
 	{
 	   level=level/2;
-	   setfillstyle(1,BROWN);
-	   setcolor(LIGHTGREEN);
+	   setfillstyle(1,BROWN); //filling of ellipses
+	   setcolor(LIGHTGREEN); //for connecting lines
 	   if(p->left->element!=NULL)
 		line(xcoord,ycoord,xcoord-level,ycoord+50);
 	   if(p->right->element!=NULL)
@@ -61,18 +64,20 @@ void GDisplay(nodeptr p,int xcoord,int ycoord)
 	   GDisplay(p->right,xcoord+(level),ycoord+50);
 	   level=level*2;
 	}
-}//end of GDisplay
+}
 
-
+/*This function is same as BST insertion
+ except we need to balance the tree after
+every insertion if it becomes unbalanced*/
 void insert(int x,nodeptr &p)
 {
-   if (p == NULL)
+   if (p == NULL) //empty tree
    {
-	p = new node;
+	p = new node; //create a node
 	p->element = x;
 	p->left=NULL;
 	p->right = NULL;
-	p->height=0;
+	p->height=0; //height of leaf nodes are taken as 0
 	if (p==NULL)
 	    {
 		gotoxy(4,21);
@@ -81,13 +86,12 @@ void insert(int x,nodeptr &p)
    }
    else
    {
-	if (x<p->element)
+	if (x<p->element) //element will inserted in left subtree
 	{
 	   insert(x,p->left);
-	   //GDisplay(root,midx,50);
-	   if ((bsheight(p->left) - bsheight(p->right))==2)
+	   if ((bsheight(p->left) - bsheight(p->right))==2)//unbalanced node
 	   {
-	      if (x < p->left->element)
+	      if (x < p->left->element) 
 		p = singlerotateleft(p);    //single rotation left
 	      else
 		p = doublerotateleft(p);  //double rotation left
@@ -96,7 +100,6 @@ void insert(int x,nodeptr &p)
 	else if (x>p->element)
 	{
 	      insert(x,p->right);
-	      //GDisplay(root,midx,50);
 	      if ((bsheight(p->right) - bsheight(p->left))==2)
 	      {
 		if (x > p->right->element)
@@ -105,7 +108,7 @@ void insert(int x,nodeptr &p)
 			p = doublerotateright(p); //double rotation right
 	     }
 	}
-	else
+	else // In BST equal keys are not allowed0
 	    {
 		gotoxy(4,21);
 		printf("Element Exists");
@@ -115,9 +118,11 @@ void insert(int x,nodeptr &p)
 	m=bsheight(p->left);
 	n=bsheight(p->right);
 	d=max(m,n);
-	p->height = d + 1;
+	p->height = d + 1; //updating the height of the root of the  subtree
 }
 
+/*As its a kind of BST therefore the min element
+will be in the leaf node of the left subtree*/
 nodeptr findmin(nodeptr p)
 {
 	if (p==NULL)
@@ -133,6 +138,8 @@ nodeptr findmin(nodeptr p)
 	}
 }
 
+/*As its a kind of BST therefore the max element
+will be in the leaf node of the right subtree*/
 nodeptr findmax(nodeptr p)
 {
 	if (p==NULL)
@@ -155,9 +162,9 @@ void find(int x,nodeptr &p)
 	   gotoxy(4,21);
 	   printf("Element not found");
 	}
-	else if (x < p->element)
+	else if (x < p->element) //then find in left subtree
 	   find(x,p->left);
-	else if (x>p->element)
+	else if (x>p->element) //else find in the right subtree
 	   find(x,p->right);
 	else
 	{
@@ -166,6 +173,10 @@ void find(int x,nodeptr &p)
 	}
 }
 
+
+/*This function is same as BST deletion
+ except we need to balance the tree after
+ every deletion if it becomes unbalanced*/
 void del(int x,nodeptr &p)
 {
 	nodeptr d;
@@ -196,31 +207,35 @@ void del(int x,nodeptr &p)
 		p = doublerotateright(p); //double rotation right
 	   }
 	}
+	//when p->element == x
 	else if ((p->left == NULL) && (p->right == NULL))
-	{
+	{  //no child node
 	   d=p;
 	   free(d);
 	   p=NULL;
 	   gotoxy(4,21); printf("Element deleted !");
 	}
 	else if (p->left == NULL)
-	{
+	{ //only right child
 	  d=p;
 	  free(d);
 	  p=p->right;
 	  gotoxy(4,21); printf("Element deleted !");
 	}
 	else if (p->right == NULL)
-	{
+	{ //only left child
 	  d=p;
 	  p=p->left;
 	  free(d);
-	  gotoxy(4,21); printf("Element deleted !");
+	  gotoxy(4,21); printf("Element deleted !"); 
 	}
-	else
-	  p->element = deletemin(p->right);
+	else //two child node
+	  p->element = deletemin(p->right);//delete the inorder successor of the node 
+	  								  //or the min element of the right subtree 	
 }
 
+/*This function delete the min 
+element of the right subtree*/
 int deletemin(nodeptr &p)
 {
 	int c;
@@ -276,6 +291,7 @@ int max(int value1, int value2)
 	  return value2;
 }
 
+//return the height of the node of AVL tree 
 int bsheight(nodeptr p)
 {
 	int t;
@@ -288,6 +304,9 @@ int bsheight(nodeptr p)
 	}
 }
 
+/*following functions are used to balance 
+the tree by performing required rotation 
+operation*/
 nodeptr singlerotateleft(nodeptr &p1)
 {
 	nodeptr p2;
@@ -334,6 +353,8 @@ int nonodes(nodeptr p)
 	return count;
 }
 
+/*function to give a graphical touch
+to the screen by making boundary*/
 void twolinebox(int x1,int y1,int x2,int y2){
  int x,y;
  textcolor(WHITE);
@@ -364,31 +385,32 @@ textcolor(color);
 gotoxy(x,y);cprintf("%s",string);
 }
 
-
+/*This function shows the transition effect along 
+with the required input options to select*/
 void Temp(void){
 int x,y;
 clrscr();
 twolinebox(1,1,80,24);
 for(y=23;y>=1;y--){
-	sound(60*y);
-	center(y,YELLOW,"[Adelson-Velskii and Landis Tree]");
+	sound(40*y); // for the sound during the transition of the title
+	center(y,CYAN,"[Adelson-Velskii and Landis Tree]"); //top heading
 	gotoxy(2,y+1); clreol();
 	twolinebox(1,1,80,24);
 	delay(40);
 	nosound();
 }
-center(1,YELLOW,"[Adelson-Velskii and Landis Tree]");
+center(1,CYAN,"[Adelson-Velskii and Landis Tree]");
 for(x=74;x>=3;x--){
-	sound(50*x);
+	sound(40*x);
 	cprintxy(x,5,RED,"Press:");   clreol();
 	twolinebox(1,1,80,24);
-	center(1,YELLOW,"[Adelson-Velskii and Landis Tree]");
+	center(1,CYAN,"[Adelson-Velskii and Landis Tree]");
 	delay(20);
 	nosound();
 }
 twolinebox(1,1,80,12);
 twolinebox(1,1,80,24);
-center(1,YELLOW,"[Adelson-Velskii and Landis Tree]");
+center(1,CYAN,"[Adelson-Velskii and Landis Tree]");
 cprintxy(20,3,GREEN,"[A]- Insertion");
 cprintxy(20,4,GREEN,"[B]- Find Minimum");
 cprintxy(20,5,GREEN,"[C]- Find Maximum");
@@ -406,7 +428,7 @@ cprintxy(20,11,LIGHTRED,"Enter your choice:   ");
 
 void main()
 {
-
+	initgraph(&gdriver,&gmode,"C:\\TURBOC3\\BGI");
 	nodeptr root,min,max;
 	int a,findele,delele,leftele,rightele,flag;
 	char choice,value[2];
@@ -419,7 +441,7 @@ void main()
 		clrscr();
 		twolinebox(1,1,80,12);
 		twolinebox(1,1,80,24);
-		center(1,YELLOW,"[Adelson-Velskii and Landis Tree]");
+		center(1,CYAN,"[Adelson-Velskii and Landis Tree]");
 		cprintxy(5,3,LIGHTRED,"Press: ");
 		cprintxy(20,3,GREEN,"[A]- Insertion");
 		cprintxy(20,4,GREEN,"[B]- Find Minimum");
@@ -452,24 +474,7 @@ void main()
 			insert(a,root);
 			gotoxy(4,15);
 			inorder(root);
-			/*
-			initgraph(&gdriver,&gmode,"c:\tc\bgi");
-			errorcode = graphresult();
-			maxx=getmaxx();
-			midx=maxx/2,xcoord=midx/2,ycoord=40;
-			if (errorcode != grOk)
-			 {
-			   printf("Graphics error: %s
-", grapherrormsg(errorcode));
-			   printf("Press any key to stop");
-			   getch();
-			   exit(1);
-			 }
-			 cleardevice();
-			 GDisplay(root,midx,50);
-			 getch();
-			 restorecrtmode();
-		*/
+
 			break;
 		case 'B':
 			if (root !=NULL)
@@ -492,7 +497,7 @@ void main()
 				find(findele,root);
 			break;
 		 case 'E':
-			initgraph(&gdriver,&gmode,"c:\tc\bgi");
+			initgraph(&gdriver,&gmode,"C:\\TURBOC3\\BGI");
 			errorcode = graphresult();
 			maxx=getmaxx();
 			midx=maxx/2;
@@ -513,8 +518,8 @@ void main()
 			 GDisplay(root,midx,50);
 			 outtextxy(20,440,"Programmed by: Shikhar Sharma");
 			 outtextxy(20,450,"National Institute of Technology Hamirpur, H.P");
-			 outtextxy(320,450,"Design and Analysis of Algorithm");
-			 outtextxy(320,460,"Project under AMIT PURI, Lecturer CSED NITH");
+			 outtextxy(320,440,"TOPIC: Design and Analysis of Algorithm");
+			 outtextxy(320,450,"Guide: AMIT PURI, Lecturer");
 			 getch();
 			 restorecrtmode();
 			break;
@@ -523,7 +528,7 @@ void main()
 			scanf("%d",&delele);
 			del(delele,root);
 			getch();
-			initgraph(&gdriver,&gmode,"c:\tc\bgi");
+			initgraph(&gdriver,&gmode,"C:\\TURBOC3\\BGI");
 			errorcode = graphresult();
 			maxx=getmaxx();
 			midx=maxx/2,xcoord=midx/2,ycoord=40;
